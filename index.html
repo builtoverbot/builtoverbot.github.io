@@ -1,80 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Built Over Bot</title>
+    <title>Built Over Bot HQ | MakerStudio</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
+        /* --- VINTAGE & TERMINAL EFFECTS --- */
         body {
-            font-family: sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            background-color: #2c2824;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
+        .vintage-bg {
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(80, 50, 20, 0.15) 0%, rgba(35, 32, 28, 1) 100%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+            background-attachment: fixed;
         }
-        .container {
-            max-width: 680px;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .header img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        .links a {
+        .scanlines::before {
+            content: " ";
             display: block;
-            background-color: #333;
-            color: #fff;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            border-radius: inherit;
         }
-        .links a:hover {
-            background-color: #555;
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.95; }
+            50% { opacity: 1; }
+            100% { opacity: 0.95; }
+        }
+        .gear-spin-slow {
+            animation: spin 25s linear infinite;
+        }
+        .gear-spin-reverse {
+            animation: spin-reverse 30s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #4ade80;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4ade80; }
+        }
+
+        /* Utility classes for repetitive elements */
+        .rivet {
+            position: absolute;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+            background-color: #78716c;
+            border: 1px solid #292524;
+            box-shadow: inset 0 -1px 2px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.2);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="https://via.placeholder.com/100" alt="Built Over Bot">
-            <h1>Built Over Bot</h1>
+<body class="vintage-bg min-h-screen text-stone-300 font-sans overflow-x-hidden selection:bg-amber-700 selection:text-white">
+
+    <!-- TOP STATUS BAR (FALLOUT TERMINAL VIBE) -->
+    <div class="w-full bg-stone-950 border-b border-green-900/50 py-1 px-4 flex justify-between items-center text-[10px] md:text-xs font-mono text-green-600/70 z-50 relative tracking-widest">
+        <div class="flex space-x-4 md:space-x-8">
+            <span class="animate-pulse">SYS.ONLINE</span>
+            <span class="hidden md:inline">MEM: 640K OK</span>
         </div>
-        <div class="links">
-            <!-- TODO: Replace the href attributes with the correct URLs for your profiles -->
-            <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank">Thangs</a>
-            <a href="https://www.printables.com/@Built_Over_Bot" target="_blank">Printables</a>
-            <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank">Makerworld</a>
-            <a href="https://cults3d.com/en/users/BuiltOverBot/3d-models" target="_blank">Cults</a>
-            <a href="https://www.twitch.tv/built_over_bot" target="_blank">Twitch</a>
-            <a href="https://www.youtube.com/builtoverbot" target="_blank">Youtube</a>
-            <a href="https://www.instagram.com/built_over_bot/" target="_blank">Instagram</a>
-            <a href="https://www.tiktok.com/@builtoverbot?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
-            <a href="https://www.facebook.com/Built.Over.Bot" target="_blank">Facebook</a>
-            <a href="https://x.com/bot_built" target="_blank">X</a>
+        <div>
+            <span>HQ: RURAL ILLINOIS // COORD_LOCKED</span>
         </div>
     </div>
+
+    <!-- HERO SECTION -->
+    <header class="relative w-full py-20 md:py-32 flex flex-col items-center justify-center border-b-8 border-stone-900 border-double shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden">
+        <!-- Background Decor -->
+        <i data-lucide="settings" class="absolute -top-10 -left-10 w-64 h-64 text-amber-900/10 gear-spin-slow pointer-events-none"></i>
+        <i data-lucide="settings" class="absolute top-32 left-20 md:left-40 w-32 h-32 text-amber-900/10 gear-spin-reverse pointer-events-none"></i>
+        <i data-lucide="settings" class="absolute -bottom-20 -right-10 w-80 h-80 text-amber-900/10 gear-spin-slow pointer-events-none"></i>
+
+        <!-- Main Logo / Placeholder -->
+        <div class="z-10 bg-stone-950 p-2 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.9),0_0_30px_rgba(217,119,6,0.1)] border-4 border-stone-800 relative group">
+            <div class="absolute inset-0 bg-amber-500 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-1000 rounded-full"></div>
+            <img id="main-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Main Logo" class="w-40 h-40 object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)] relative z-10">
+        </div>
+
+        <h1 class="mt-8 text-5xl md:text-7xl lg:text-8xl font-serif font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-amber-200 via-amber-500 to-amber-900 drop-shadow-lg text-center uppercase z-10 px-4 leading-none">
+            Built Over Bot
+        </h1>
+        <div class="mt-6 flex items-center space-x-4 z-10 w-full max-w-2xl px-8">
+            <div class="h-px flex-1 bg-gradient-to-r from-transparent to-amber-600/50"></div>
+            <p class="font-mono text-amber-500 uppercase tracking-[0.3em] text-xs md:text-sm text-center">
+                Make Important Things for Important People
+            </p>
+            <div class="h-px flex-1 bg-gradient-to-l from-transparent to-amber-600/50"></div>
+        </div>
+    </header>
+
+    <!-- LORE SECTION (ABOUT US) -->
+    <section class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid lg:grid-cols-2 gap-10 relative z-10">
+
+        <!-- Automation Side (Terminal) -->
+        <div class="relative border-2 border-green-800 bg-[#051505] p-6 md:p-8 overflow-hidden rounded-md shadow-[inset_0_0_20px_rgba(0,50,0,1),0_0_15px_rgba(0,0,0,0.8)]">
+            <div class="scanlines absolute inset-0"></div>
+            <div class="crt-flicker relative z-20 text-green-500 font-mono text-shadow-sm">
+                <div class="flex items-center space-x-3 mb-6 border-b border-green-800 pb-3">
+                    <i data-lucide="terminal" class="w-6 h-6"></i>
+                    <h2 class="text-xl md:text-2xl tracking-widest uppercase font-bold text-green-400 inline-block typewriter">System.Info //</h2>
+                </div>
+                <div class="space-y-3 text-sm md:text-base">
+                    <p><span class="text-green-700 font-bold mr-2">&gt;</span> <span class="text-stone-400">OPERATORS:</span> Bob & Sandy</p>
+                    <p><span class="text-green-700 font-bold mr-2">&gt;</span> <span class="text-stone-400">DESIGNATION:</span> Husband & Wife Design Team</p>
+                    <p><span class="text-green-700 font-bold mr-2">&gt;</span> <span class="text-stone-400">ESTABLISHED:</span> 2013 [Initial Boot]</p>
+                    <p><span class="text-green-700 font-bold mr-2">&gt;</span> <span class="text-stone-400">ACTIVE_HARDWARE:</span> 8+ Multi-Material Units</p>
+                    <p><span class="text-green-700 font-bold mr-2">&gt;</span> <span class="text-stone-400">DESIGNS_COMPILED:</span> 400+ Files</p>
+                    <p class="mt-6 text-green-400 animate-pulse font-bold text-lg">_</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Craftsmanship Side (Steampunk) -->
+        <div class="relative border-4 border-stone-800 bg-[#26201b] shadow-[8px_8px_0_rgba(0,0,0,0.7)] p-6 md:p-8">
+            <div class="rivet top-2 left-2"></div>
+            <div class="rivet top-2 right-2"></div>
+            <div class="rivet bottom-2 left-2"></div>
+            <div class="rivet bottom-2 right-2"></div>
+            <div class="absolute inset-2 border border-stone-700/50 pointer-events-none"></div>
+            <div class="relative z-10">
+                <div class="flex items-center space-x-3 mb-6 border-b border-stone-700 pb-3">
+                    <i data-lucide="wrench" class="w-7 h-7 text-amber-600"></i>
+                    <h2 class="text-xl md:text-2xl font-serif tracking-widest uppercase text-amber-500 font-bold">The Artisans</h2>
+                </div>
+                <p class="text-stone-300 font-serif leading-relaxed text-base md:text-lg">
+                    We are an Artisan 3D Print Shop focused on bringing imagination to the physical realm.
+                    Our journey began over a decade ago with our very first handmade printer, evolving today into a
+                    robust arsenal of multi-material automation.
+                </p>
+                <p class="text-stone-400 font-serif leading-relaxed text-base md:text-lg mt-4">
+                    We specialize in small cute chunky animals, intricate dragons, and satisfying flexi-prints. We design not just for ourselves, but to empower makers across the wasteland with proven, reliable files.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ARSENAL (DESIGNS) -->
+    <section class="max-w-6xl mx-auto px-4 py-12 relative z-10">
+        <div class="text-center mb-16 relative">
+            <div class="absolute top-1/2 left-0 right-0 h-px bg-stone-800 -z-10"></div>
+            <h2 class="inline-block px-6 bg-[#2c2824] text-3xl md:text-5xl font-serif uppercase tracking-widest text-stone-100 drop-shadow-[0_2px_2px_rgba(0,0,0,1)] hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.9)] transition-all duration-300">
+                <span class="text-amber-600">The</span> Blueprints
+            </h2>
+            <p class="font-mono text-stone-500 text-xs md:text-sm mt-4 uppercase tracking-[0.2em]">Access our growing catalog of 3D printable files.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <!-- Thangs Vault -->
+            <div class="relative border-4 border-amber-900 bg-gradient-to-br from-[#26201b] to-[#1c1611] hover:to-[#2a1a11] transition-all shadow-[8px_8px_0_rgba(0,0,0,0.7)] p-6 md:p-8 group">
+                <div class="rivet top-2 left-2"></div>
+                <div class="rivet top-2 right-2"></div>
+                <div class="rivet bottom-2 left-2"></div>
+                <div class="rivet bottom-2 right-2"></div>
+                <div class="absolute inset-2 border border-stone-700/50 pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <div class="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                        <i data-lucide="database" class="w-24 h-24 text-amber-500"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-serif text-amber-400 mb-2 flex items-center">
+                        THANGS <i data-lucide="chevron-right" class="w-6 h-6 ml-2 text-amber-600"></i>
+                    </h3>
+                    <div class="h-0.5 w-16 bg-amber-700/50 mb-6"></div>
+                    <p class="text-stone-300 text-sm md:text-base mb-4 relative z-10 leading-relaxed font-serif">
+                        Join our active membership! Gain exclusive access to our specialty small cute chunky animals, "Blossom Dragons", and satisfying flexis.
+                    </p>
+                    <p class="text-amber-600/80 text-sm font-mono mb-8 relative z-10 bg-stone-950 p-3 rounded border border-stone-800">
+                        * Active members receive full commercial rights to sell physical prints.
+                    </p>
+                    <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank" rel="noreferrer" class="inline-block px-8 py-3 bg-gradient-to-b from-amber-700 to-amber-900 border border-amber-500 text-amber-100 font-mono text-sm uppercase tracking-widest hover:from-amber-600 hover:to-amber-800 shadow-[0_0_15px_rgba(217,119,6,0.3)] hover:shadow-[0_0_20px_rgba(217,119,6,0.7)] transition-all">
+                        Access Vault
+                    </a>
+                </div>
+            </div>
+
+            <!-- MakerWorld Terminal -->
+            <div class="relative border-2 border-green-800 bg-[#051505] hover:bg-[#061e06] transition-colors p-6 md:p-8 overflow-hidden rounded-md shadow-[inset_0_0_20px_rgba(0,50,0,1),0_0_15px_rgba(0,0,0,0.8)] group">
+                <div class="scanlines absolute inset-0"></div>
+                <div class="crt-flicker relative z-20 text-green-500 font-mono text-shadow-sm">
+                    <div class="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-15 transition-opacity pointer-events-none">
+                        <i data-lucide="cpu" class="w-24 h-24 text-green-500"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-mono font-bold text-green-400 mb-2 flex items-center">
+                        MAKERWORLD <i data-lucide="chevron-right" class="w-6 h-6 ml-2 text-green-700"></i>
+                    </h3>
+                    <div class="h-0.5 w-16 bg-green-900 mb-6"></div>
+                    <p class="text-green-600 text-sm md:text-base mb-4 relative z-10 font-mono leading-relaxed">
+                        Discover our utility models, functional prints, and featured designs like the "Light Up Eye Gator Dragon" and "Cauldron Purse".
+                    </p>
+                    <p class="text-green-500/80 text-sm font-mono mb-8 relative z-10 bg-green-950/40 p-3 rounded border border-green-900">
+                        &gt; STATUS: MakerWorld Guardian<br/>
+                        &gt; Contributing proven, robust schematics.
+                    </p>
+                    <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank" rel="noreferrer" class="inline-block px-8 py-3 border-2 border-green-600 text-green-400 font-mono font-bold text-sm uppercase tracking-widest hover:bg-green-600 hover:text-green-950 shadow-[0_0_10px_rgba(0,255,0,0.2)] hover:shadow-[0_0_25px_rgba(0,255,0,0.5)] transition-all">
+                        Initialize Uploads
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAKERSTUDIO (THE MAKERSPACE) -->
+    <section class="relative my-24 py-24 border-y-8 border-stone-900 border-double bg-stone-900/80 shadow-[0_0_50px_rgba(0,0,0,0.9)]">
+        <!-- Background overlay specifically for MakerStudio -->
+        <div class="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z\' fill=\'%23b45309\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E')"></div>
+
+        <div class="max-w-6xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+            <div class="w-full md:w-1/3 flex justify-center order-2 md:order-1">
+                <div class="p-4 rounded-full bg-stone-950 shadow-[inset_0_0_30px_rgba(0,0,0,1),0_0_40px_rgba(217,119,6,0.3)] border-4 border-stone-800 relative">
+                    <div class="rivet top-4 left-4"></div>
+                    <div class="rivet bottom-4 right-4"></div>
+
+                    <!-- MakerStudio Logo / Placeholder -->
+                    <img id="studio-logo-img" src="MakerStudio.svg" alt="MakerStudio Logo" class="w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)] relative z-10">
+                </div>
+            </div>
+            <div class="w-full md:w-2/3 space-y-6 order-1 md:order-2 text-center md:text-left">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-serif uppercase tracking-tighter text-amber-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        MakerStudio
+                    </h2>
+                    <h3 class="font-mono text-stone-400 mt-2 uppercase tracking-widest text-xs md:text-sm bg-stone-950 inline-block px-3 py-1 rounded border border-stone-800">
+                        Project: Genesis // Historic Hardware Store
+                    </h3>
+                </div>
+
+                <div class="h-1 w-24 bg-gradient-to-r from-amber-700 to-transparent rounded mx-auto md:mx-0"></div>
+
+                <p class="text-stone-300 font-serif leading-relaxed text-lg md:text-xl">
+                    We are breathing new life into a historic hardware store in rural Illinois, transforming it into a vibrant community makerspace.
+                </p>
+                <p class="text-stone-400 font-serif leading-relaxed text-base md:text-lg">
+                    <strong class="text-amber-600 font-bold">MakerStudio</strong> is where the rust of the past meets the innovation of the future. We are rescuing and restoring unique vintage equipment, creating an environment that honors classic craftsmanship while embracing the limitless potential of modern 3D automation.
+                </p>
+
+                <div class="pt-6 flex flex-wrap justify-center md:justify-start gap-4">
+                    <span class="px-4 py-2 bg-stone-950 border border-stone-800 text-stone-300 font-mono text-xs uppercase tracking-wider rounded-md shadow-inner">Vintage Machinery</span>
+                    <span class="px-4 py-2 bg-stone-950 border border-stone-800 text-stone-300 font-mono text-xs uppercase tracking-wider rounded-md shadow-inner">Community Space</span>
+                    <span class="px-4 py-2 bg-stone-950 border border-stone-800 text-stone-300 font-mono text-xs uppercase tracking-wider rounded-md shadow-inner">3D Printing Lab</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-stone-950 py-16 border-t-4 border-stone-800 relative z-10 text-center">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
+
+            <!-- Footer Logo / Placeholder -->
+            <img id="footer-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Small Logo" class="w-16 h-16 mb-8 opacity-50 hover:opacity-100 transition-opacity object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)]">
+
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
+                <a href="https://builtoverbot.com" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[Website]</a>
+                <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[Thangs]</a>
+                <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[MakerWorld]</a>
+                <a href="https://www.youtube.com/@BuiltOverBot" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[YouTube]</a>
+                <a href="https://www.instagram.com/built_over_bot/" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[Instagram]</a>
+                <a href="https://www.twitch.tv/builtoverbot" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[Twitch]</a>
+                <a href="https://cults3d.com/en/users/Built_Over_Bot/3d-models" target="_blank" rel="noreferrer" class="text-stone-400 hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-500 pb-1">[Cults]</a>
+            </div>
+
+            <div class="h-px w-full max-w-sm bg-gradient-to-r from-transparent via-stone-800 to-transparent mb-8"></div>
+
+            <p class="font-mono text-stone-600 text-xs md:text-sm uppercase tracking-[0.2em]">
+                © 2026 Built Over Bot.<br/>
+                <span class="text-green-900 mt-2 block animate-pulse">All systems nominal.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Icon Rendering -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
