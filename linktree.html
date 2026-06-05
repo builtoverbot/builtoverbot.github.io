@@ -1,80 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Built Over Bot</title>
+    <title>Built Over Bot | Links</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
+        /* --- VINTAGE & TERMINAL EFFECTS --- */
         body {
-            font-family: sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            background-color: #2c2824;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
+        .vintage-bg {
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(80, 50, 20, 0.15) 0%, rgba(35, 32, 28, 1) 100%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+            background-attachment: fixed;
         }
-        .container {
-            max-width: 680px;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .header img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        .links a {
+        .scanlines::before {
+            content: " ";
             display: block;
-            background-color: #333;
-            color: #fff;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            border-radius: inherit;
         }
-        .links a:hover {
-            background-color: #555;
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.95; }
+            50% { opacity: 1; }
+            100% { opacity: 0.95; }
+        }
+        .gear-spin-slow {
+            animation: spin 25s linear infinite;
+        }
+        .gear-spin-reverse {
+            animation: spin-reverse 30s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #4ade80;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4ade80; }
+        }
+
+        /* Utility classes for repetitive elements */
+        .rivet {
+            position: absolute;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+            background-color: #78716c;
+            border: 1px solid #292524;
+            box-shadow: inset 0 -1px 2px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.2);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img id="main-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Main Logo" class="w-40 h-40 object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)] relative z-10">
-            <h1>Built Over Bot</h1>
+<body class="vintage-bg min-h-screen text-stone-300 font-sans overflow-x-hidden selection:bg-amber-700 selection:text-white">
+
+    <!-- TOP STATUS BAR (FALLOUT TERMINAL VIBE) -->
+    <div class="w-full bg-stone-950 border-b border-green-900/50 py-1 px-4 flex justify-between items-center text-[10px] md:text-xs font-mono text-green-600/70 z-50 relative tracking-widest">
+        <div class="flex space-x-4 md:space-x-8">
+            <span class="animate-pulse">SYS.ONLINE</span>
+            <span class="hidden md:inline">MEM: 640K OK</span>
         </div>
-        <div class="links">
-            <!-- TODO: Replace the href attributes with the correct URLs for your profiles -->
-            <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank">Thangs</a>
-            <a href="https://www.printables.com/@Built_Over_Bot" target="_blank">Printables</a>
-            <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank">Makerworld</a>
-            <a href="https://cults3d.com/en/users/BuiltOverBot/3d-models" target="_blank">Cults</a>
-            <a href="https://www.twitch.tv/built_over_bot" target="_blank">Twitch</a>
-            <a href="https://www.youtube.com/builtoverbot" target="_blank">Youtube</a>
-            <a href="https://www.instagram.com/built_over_bot/" target="_blank">Instagram</a>
-            <a href="https://www.tiktok.com/@builtoverbot?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
-            <a href="https://www.facebook.com/Built.Over.Bot" target="_blank">Facebook</a>
-            <a href="https://x.com/bot_built" target="_blank">X</a>
+        <div>
+            <span>HQ: RURAL ILLINOIS // COORD_LOCKED</span>
         </div>
     </div>
+
+    <!-- HERO SECTION -->
+    <header class="relative w-full py-20 md:py-32 flex flex-col items-center justify-center border-b-8 border-stone-900 border-double shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden">
+        <!-- Background Decor -->
+        <i data-lucide="settings" class="absolute -top-10 -left-10 w-64 h-64 text-amber-900/10 gear-spin-slow pointer-events-none"></i>
+        <i data-lucide="settings" class="absolute top-32 left-20 md:left-40 w-32 h-32 text-amber-900/10 gear-spin-reverse pointer-events-none"></i>
+        <i data-lucide="settings" class="absolute -bottom-20 -right-10 w-80 h-80 text-amber-900/10 gear-spin-slow pointer-events-none"></i>
+
+        <!-- Main Logo / Placeholder -->
+        <div class="z-10 bg-stone-950 p-2 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.9),0_0_30px_rgba(217,119,6,0.1)] border-4 border-stone-800 relative group">
+            <div class="absolute inset-0 bg-amber-500 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-1000 rounded-full"></div>
+            <img id="main-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Main Logo" class="w-40 h-40 object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)] relative z-10">
+        </div>
+
+        <h1 class="mt-8 text-5xl md:text-7xl lg:text-8xl font-serif font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-amber-200 via-amber-500 to-amber-900 drop-shadow-lg text-center uppercase z-10 px-4 leading-none">
+            Built Over Bot
+        </h1>
+        <div class="mt-6 flex items-center space-x-4 z-10 w-full max-w-2xl px-8">
+            <div class="h-px flex-1 bg-gradient-to-r from-transparent to-amber-600/50"></div>
+            <p class="font-mono text-amber-500 uppercase tracking-[0.3em] text-xs md:text-sm text-center">
+                Make Important Things for Important People
+            </p>
+            <div class="h-px flex-1 bg-gradient-to-l from-transparent to-amber-600/50"></div>
+        </div>
+    </header>
+
+    <div class="max-w-xl mx-auto px-4 py-16 relative z-10">
+        <div class="flex flex-col space-y-6">
+            <!-- Thangs -->
+            <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-amber-900/20 group-hover:bg-amber-900/40 transition-colors border-2 border-amber-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-amber-500 group-hover:text-amber-400 transition-colors">Thangs</span>
+                    <i data-lucide="external-link" class="w-4 h-4 ml-3 text-amber-700 group-hover:text-amber-500 transition-colors"></i>
+                </div>
+                <div class="rivet top-1 left-1 w-2 h-2"></div>
+                <div class="rivet top-1 right-1 w-2 h-2"></div>
+                <div class="rivet bottom-1 left-1 w-2 h-2"></div>
+                <div class="rivet bottom-1 right-1 w-2 h-2"></div>
+            </a>
+
+            <!-- MakerWorld -->
+            <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-green-950/20 group-hover:bg-green-950/40 transition-colors border-2 border-green-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)] overflow-hidden">
+                    <div class="scanlines absolute inset-0 opacity-30"></div>
+                </div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-mono text-xl uppercase tracking-widest text-green-500 group-hover:text-green-400 transition-colors">MakerWorld</span>
+                    <i data-lucide="terminal" class="w-4 h-4 ml-3 text-green-700 group-hover:text-green-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Printables -->
+            <a href="https://www.printables.com/@Built_Over_Bot" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-stone-800/40 group-hover:bg-stone-800/60 transition-colors border-2 border-stone-700/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-stone-300 group-hover:text-white transition-colors">Printables</span>
+                    <i data-lucide="box" class="w-4 h-4 ml-3 text-stone-500 group-hover:text-stone-300 transition-colors"></i>
+                </div>
+                <div class="rivet top-1 left-1 w-2 h-2"></div>
+                <div class="rivet top-1 right-1 w-2 h-2"></div>
+                <div class="rivet bottom-1 left-1 w-2 h-2"></div>
+                <div class="rivet bottom-1 right-1 w-2 h-2"></div>
+            </a>
+
+             <!-- Cults -->
+             <a href="https://cults3d.com/en/users/BuiltOverBot/3d-models" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-stone-800/40 group-hover:bg-stone-800/60 transition-colors border-2 border-stone-700/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-stone-300 group-hover:text-white transition-colors">Cults3D</span>
+                    <i data-lucide="layers" class="w-4 h-4 ml-3 text-stone-500 group-hover:text-stone-300 transition-colors"></i>
+                </div>
+                <div class="rivet top-1 left-1 w-2 h-2"></div>
+                <div class="rivet top-1 right-1 w-2 h-2"></div>
+                <div class="rivet bottom-1 left-1 w-2 h-2"></div>
+                <div class="rivet bottom-1 right-1 w-2 h-2"></div>
+            </a>
+
+            <!-- Youtube -->
+            <a href="https://www.youtube.com/builtoverbot" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-red-950/20 group-hover:bg-red-950/40 transition-colors border-2 border-red-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-red-500 group-hover:text-red-400 transition-colors">YouTube</span>
+                    <i data-lucide="youtube" class="w-4 h-4 ml-3 text-red-700 group-hover:text-red-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Twitch -->
+            <a href="https://www.twitch.tv/built_over_bot" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-purple-950/20 group-hover:bg-purple-950/40 transition-colors border-2 border-purple-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-purple-500 group-hover:text-purple-400 transition-colors">Twitch</span>
+                    <i data-lucide="twitch" class="w-4 h-4 ml-3 text-purple-700 group-hover:text-purple-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/built_over_bot/" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-pink-950/20 group-hover:bg-pink-950/40 transition-colors border-2 border-pink-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-pink-500 group-hover:text-pink-400 transition-colors">Instagram</span>
+                    <i data-lucide="instagram" class="w-4 h-4 ml-3 text-pink-700 group-hover:text-pink-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Tiktok -->
+            <a href="https://www.tiktok.com/@builtoverbot?is_from_webapp=1&sender_device=pc" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-stone-900/40 group-hover:bg-stone-900/60 transition-colors border-2 border-stone-800/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-stone-300 group-hover:text-white transition-colors">TikTok</span>
+                    <i data-lucide="music-2" class="w-4 h-4 ml-3 text-stone-600 group-hover:text-stone-400 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/Built.Over.Bot" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-blue-950/20 group-hover:bg-blue-950/40 transition-colors border-2 border-blue-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-serif text-xl uppercase tracking-widest text-blue-500 group-hover:text-blue-400 transition-colors">Facebook</span>
+                    <i data-lucide="facebook" class="w-4 h-4 ml-3 text-blue-700 group-hover:text-blue-500 transition-colors"></i>
+                </div>
+            </a>
+
+            <!-- X -->
+            <a href="https://x.com/bot_built" target="_blank" rel="noreferrer" class="relative group block">
+                <div class="absolute inset-0 bg-stone-950/40 group-hover:bg-stone-950/60 transition-colors border-2 border-stone-900/50 rounded shadow-[4px_4px_0_rgba(0,0,0,0.5)]"></div>
+                <div class="relative p-4 flex items-center justify-center">
+                    <span class="font-mono text-xl uppercase tracking-widest text-stone-300 group-hover:text-white transition-colors">X / Twitter</span>
+                    <i data-lucide="twitter" class="w-4 h-4 ml-3 text-stone-600 group-hover:text-stone-400 transition-colors"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-stone-950 py-16 border-t-4 border-stone-800 relative z-10 text-center">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
+             <!-- Footer Logo -->
+             <img id="footer-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Small Logo" class="w-16 h-16 mb-8 opacity-50 hover:opacity-100 transition-opacity object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)]">
+
+            <p class="font-mono text-stone-600 text-xs md:text-sm uppercase tracking-[0.2em]">
+                © 2026 Built Over Bot.<br/>
+                <span class="text-green-900 mt-2 block animate-pulse">All systems nominal.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Icon Rendering -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
