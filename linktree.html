@@ -292,8 +292,22 @@
     <!-- FOOTER -->
     <footer class="bg-stone-100 dark:bg-stone-950 py-16 border-t-4 border-stone-200 dark:border-stone-800 relative z-10 text-center">
         <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
-             <!-- Footer Logo -->
-             <img id="footer-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Small Logo" class="w-16 h-16 mb-8 opacity-50 hover:opacity-100 transition-opacity object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)]">
+
+            <!-- Footer Logo / Placeholder -->
+            <img id="footer-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Small Logo" class="w-16 h-16 mb-8 opacity-50 hover:opacity-100 transition-opacity object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)]">
+
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
+                <a href="https://builtoverbot.com" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Website]</a>
+                <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Thangs]</a>
+                <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[MakerWorld]</a>
+                <a href="https://www.youtube.com/@BuiltOverBot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[YouTube]</a>
+                <a href="https://www.instagram.com/built_over_bot/" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Instagram]</a>
+                <a href="https://www.twitch.tv/builtoverbot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Twitch]</a>
+                <a href="https://cults3d.com/en/users/BuiltOverBot/3d-models" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Cults]</a>
+                <a href="website.zip" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Download ZIP]</a>
+            </div>
+
+            <div class="h-px w-full max-w-sm bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-800 to-transparent mb-8"></div>
 
             <p class="font-mono text-stone-500 dark:text-stone-600 text-xs md:text-sm uppercase tracking-[0.2em]">
                 © 2026 Built Over Bot.<br/>
@@ -304,13 +318,13 @@
 
     <!-- JavaScript for Icon Rendering -->
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.theme = isDark ? 'dark' : 'light';
         }
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
