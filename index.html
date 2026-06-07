@@ -362,7 +362,7 @@
     </section>
 
     <!-- MAKERSTUDIO (THE MAKERSPACE) -->
-    <section class="relative my-24 py-24 border-y-8 border-stone-300 dark:border-stone-900 border-double bg-stone-200/50 dark:bg-stone-900/80 shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_50px_rgba(0,0,0,0.9)]">
+    <section class="relative mt-24 py-24 border-y-8 border-stone-300 dark:border-stone-900 border-double bg-stone-200/50 dark:bg-stone-900/80 shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_50px_rgba(0,0,0,0.9)]">
         <!-- Background overlay specifically for MakerStudio -->
         <div class="absolute inset-0 opacity-5 dark:opacity-10 mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z\' fill=\'%23b45309\' fill-opacity=\'1\' fill-rule=\'evenodd\'/%3E%3C/svg%3E')"></div>
 
@@ -404,6 +404,91 @@
         </div>
     </section>
 
+    <!-- CONTACT & COORDINATES -->
+    <section id="contact" class="max-w-6xl mx-auto px-4 py-24 relative z-10">
+        <div class="text-center mb-16 relative">
+            <div class="absolute top-1/2 left-0 right-0 h-px bg-stone-300 dark:bg-stone-800 -z-10"></div>
+            <h2 class="inline-block px-6 bg-stone-50 dark:bg-[#2c2824] text-3xl md:text-5xl font-serif uppercase tracking-widest text-stone-800 dark:text-stone-100 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_2px_2px_rgba(0,0,0,1)]">
+                <span class="text-amber-700 dark:text-amber-600">Contact</span> & Coordinates
+            </h2>
+            <p class="font-mono text-stone-400 dark:text-stone-500 text-xs md:text-sm mt-4 uppercase tracking-[0.2em]">Establish a direct link to the workshop.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+            <!-- CONTACT FORM (TERMINAL STYLE) -->
+            <div class="relative border-2 border-stone-300 dark:border-green-800 bg-stone-100 dark:bg-[#051505] p-6 md:p-8 overflow-hidden rounded-md shadow-[inset_0_0_20px_rgba(0,0,0,0.05),0_0_15px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_20px_rgba(0,50,0,1),0_0_15px_rgba(0,0,0,0.8)]">
+                <div class="scanlines absolute inset-0"></div>
+                <div class="crt-flicker relative z-20">
+                    <div class="flex items-center space-x-3 mb-8 border-b border-stone-300 dark:border-green-800 pb-3">
+                        <i data-lucide="mail" class="w-6 h-6 text-stone-600 dark:text-green-500"></i>
+                        <h3 class="text-xl font-mono font-bold text-stone-800 dark:text-green-400 uppercase tracking-tighter">Transmission.Form //</h3>
+                    </div>
+
+                    <form action="https://formspree.io/f/robertwaters24@gmail.com" method="POST" class="space-y-6">
+                        <div class="space-y-2">
+                            <label class="block font-mono text-[10px] uppercase text-stone-500 dark:text-green-700 tracking-[0.2em] font-bold">Ident_Name</label>
+                            <input type="text" name="name" required class="w-full bg-stone-200/50 dark:bg-stone-900/50 border border-stone-300 dark:border-green-900 p-3 text-stone-800 dark:text-green-400 font-mono focus:outline-none focus:border-amber-600 dark:focus:border-green-500 transition-colors" placeholder="ENTER NAME...">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block font-mono text-[10px] uppercase text-stone-500 dark:text-green-700 tracking-[0.2em] font-bold">Ident_Email</label>
+                            <input type="email" name="email" required class="w-full bg-stone-200/50 dark:bg-stone-900/50 border border-stone-300 dark:border-green-900 p-3 text-stone-800 dark:text-green-400 font-mono focus:outline-none focus:border-amber-600 dark:focus:border-green-500 transition-colors" placeholder="ENTER EMAIL...">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block font-mono text-[10px] uppercase text-stone-500 dark:text-green-700 tracking-[0.2em] font-bold">Transmission_Data</label>
+                            <textarea name="message" rows="4" required class="w-full bg-stone-200/50 dark:bg-stone-900/50 border border-stone-300 dark:border-green-900 p-3 text-stone-800 dark:text-green-400 font-mono focus:outline-none focus:border-amber-600 dark:focus:border-green-500 transition-colors" placeholder="ENTER MESSAGE..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-stone-300 dark:bg-green-900/20 border-2 border-stone-400 dark:border-green-600 text-stone-800 dark:text-green-400 font-mono font-bold text-sm uppercase tracking-widest hover:bg-stone-400 dark:hover:bg-green-600 dark:hover:text-green-950 shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_15px_rgba(0,255,0,0.2)] transition-all flex items-center justify-center space-x-2 group">
+                            <span>Execute.Send</span>
+                            <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MAP & COORDINATES (STEAMPUNK STYLE) -->
+            <div class="relative border-4 border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-[#26201b] shadow-[8px_8px_0_rgba(0,0,0,0.1)] dark:shadow-[8px_8px_0_rgba(0,0,0,0.7)] p-6 md:p-8">
+                <div class="rivet top-2 left-2"></div>
+                <div class="rivet top-2 right-2"></div>
+                <div class="rivet bottom-2 left-2"></div>
+                <div class="rivet bottom-2 right-2"></div>
+                <div class="absolute inset-2 border border-stone-400/20 dark:border-stone-700/50 pointer-events-none"></div>
+
+                <div class="relative z-10 h-full flex flex-col">
+                    <div class="flex items-center space-x-3 mb-6 border-b border-stone-300 dark:border-stone-700 pb-3">
+                        <i data-lucide="map-pin" class="w-7 h-7 text-amber-600"></i>
+                        <h3 class="text-xl font-serif tracking-widest uppercase text-amber-700 dark:text-amber-500 font-bold">The Outpost</h3>
+                    </div>
+
+                    <p class="text-stone-700 dark:text-stone-300 font-serif mb-6 leading-relaxed">
+                        381 2nd Street<br>
+                        Omaha, IL 62871<br>
+                        United States
+                    </p>
+
+                    <!-- Google Maps Embed -->
+                    <div class="flex-grow w-full h-[300px] mb-8 border-2 border-stone-300 dark:border-stone-800 rounded shadow-inner overflow-hidden relative">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3161.4243644342416!2d-88.3079979!3d37.892742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8871383794354a7f%3A0x7d6a5405089e0246!2s381%202nd%20St%2C%20Omaha%2C%20IL%2062871%2C%20USA!5e0!3m2!1sen!2suk!4v1717777000000!5m2!1sen!2suk"
+                            width="100%"
+                            height="100%"
+                            style="border:0; filter: grayscale(0.5) contrast(1.2) brightness(0.9);"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            class="dark:opacity-80">
+                        </iframe>
+                    </div>
+
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=381+2nd+street+Omaha+IL+62871" target="_blank" class="w-full py-4 bg-gradient-to-b from-amber-700 to-amber-900 border border-amber-500 text-amber-100 font-mono text-sm uppercase tracking-widest hover:from-amber-600 hover:to-amber-800 shadow-[0_0_15px_rgba(217,119,6,0.3)] hover:shadow-[0_0_20px_rgba(217,119,6,0.7)] transition-all flex items-center justify-center space-x-2">
+                        <i data-lucide="navigation" class="w-4 h-4"></i>
+                        <span>Get Directions</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="bg-stone-100 dark:bg-stone-950 py-16 border-t-4 border-stone-200 dark:border-stone-800 relative z-10 text-center">
         <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
@@ -419,6 +504,7 @@
                 <a href="https://www.instagram.com/built_over_bot/" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Instagram]</a>
                 <a href="https://www.twitch.tv/builtoverbot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Twitch]</a>
                 <a href="https://cults3d.com/en/users/BuiltOverBot/3d-models" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Cults]</a>
+                <a href="#contact" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Contact]</a>
                 <a href="website.zip" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Download ZIP]</a>
             </div>
 
