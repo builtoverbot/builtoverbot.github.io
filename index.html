@@ -18,12 +18,22 @@
     </script>
 
     <script>
-        // Initial theme check
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
+        // Initial theme check based on system preference
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function updateTheme(e) {
+            if (e.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         }
+
+        // Initialize theme
+        updateTheme(darkModeMediaQuery);
+
+        // Listen for system theme changes
+        darkModeMediaQuery.addEventListener('change', updateTheme);
     </script>
 
     <style>
@@ -428,8 +438,8 @@
     <!-- JavaScript for Icon Rendering -->
     <script>
         function toggleTheme() {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.theme = isDark ? 'dark' : 'light';
+            // Toggle theme for the current session only (no localStorage)
+            document.documentElement.classList.toggle('dark');
         }
 
         // Initialize Lucide Icons
