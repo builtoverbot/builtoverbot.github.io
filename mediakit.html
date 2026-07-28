@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Built Over Bot | Influencer Media Kit</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Chart.js via CDN for statistics graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+
+    <script>
+        // Initial theme check
+        if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark')
+        } else {
+            document.documentElement.classList.add('dark')
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #f5f5f4;
+            --text-color: #1c1917;
+            --accent-glow: rgba(217, 119, 6, 0.05);
+            --rivet-color: #a8a29e;
+            --rivet-border: #78716c;
+            --scanline-color: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.05) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+        }
+
+        .dark {
+            --bg-color: #2c2824;
+            --text-color: #d6d3d1;
+            --accent-glow: rgba(217, 119, 6, 0.1);
+            --rivet-color: #78716c;
+            --rivet-border: #292524;
+            --scanline-color: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        }
+
+        /* --- VINTAGE & TERMINAL EFFECTS --- */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .vintage-bg {
+            background-image:
+                radial-gradient(circle at 50% 0%, var(--accent-glow) 0%, var(--bg-color) 100%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+        .scanlines::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: var(--scanline-color);
+            z-index: 10;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.95; }
+            50% { opacity: 1; }
+            100% { opacity: 0.95; }
+        }
+        .gear-spin-slow {
+            animation: spin 25s linear infinite;
+        }
+        .gear-spin-reverse {
+            animation: spin-reverse 30s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #4ade80;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4ade80; }
+        }
+
+        /* Utility classes for repetitive elements */
+        .rivet {
+            position: absolute;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+            background-color: var(--rivet-color);
+            border: 1px solid var(--rivet-border);
+            box-shadow: inset 0 -1px 2px rgba(0,0,0,0.4), 0 1px 1px rgba(255,255,255,0.2);
+        }
+        .dark .rivet {
+            box-shadow: inset 0 -1px 2px rgba(0,0,0,0.8), 0 1px 1px rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="vintage-bg min-h-screen text-stone-900 dark:text-stone-300 font-sans overflow-x-hidden selection:bg-amber-700 selection:text-white">
+
+    <!-- TOP STATUS BAR (FALLOUT TERMINAL VIBE) -->
+    <div class="w-full bg-stone-200 dark:bg-stone-950 border-b border-stone-300 dark:border-green-900/50 py-1 px-4 flex justify-between items-center text-[10px] md:text-xs font-mono text-stone-600 dark:text-green-600/70 z-50 relative tracking-widest">
+        <div class="flex items-center space-x-4 md:space-x-8">
+            <span class="animate-pulse">SYS.ONLINE</span>
+            <span id="sys-sync-status" class="text-amber-700 dark:text-green-500 font-bold flex items-center">
+                <i data-lucide="loader" class="w-3.5 h-3.5 mr-1.5 animate-spin"></i>
+                SYS.SYNC // INITIALIZING...
+            </span>
+            <span class="hidden md:inline">MEM: 640K OK</span>
+
+            <!-- Theme Toggle Button -->
+            <button onclick="toggleTheme()" class="flex items-center space-x-1 px-2 py-0.5 border border-stone-300 dark:border-green-900/50 rounded hover:bg-stone-300/50 dark:hover:bg-green-900/20 transition-colors">
+                <i data-lucide="sun" class="w-3 h-3 hidden dark:block"></i>
+                <i data-lucide="moon" class="w-3 h-3 block dark:hidden"></i>
+                <span class="text-[8px] uppercase">Theme</span>
+            </button>
+            <a href="index.html" class="flex items-center space-x-1 px-2 py-0.5 border border-stone-300 dark:border-green-900/50 rounded hover:bg-stone-300/50 dark:hover:bg-green-900/20 transition-colors text-[8px] uppercase">
+                &lt; BACK TO HQ
+            </a>
+        </div>
+        <div>
+            <span>HQ: RURAL ILLINOIS // COORD_LOCKED</span>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <header class="relative w-full py-20 md:py-32 flex flex-col items-center justify-center border-b-8 border-stone-300 dark:border-stone-900 border-double shadow-[0_10px_30px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden">
+        <!-- Background Decor -->
+        <i data-lucide="settings" class="absolute -top-10 -left-10 w-64 h-64 text-amber-900/5 dark:text-amber-900/10 gear-spin-slow pointer-events-none"></i>
+        <i data-lucide="settings" class="absolute top-32 left-20 md:left-40 w-32 h-32 text-amber-900/5 dark:text-amber-900/10 gear-spin-reverse pointer-events-none"></i>
+        <i data-lucide="settings" class="absolute -bottom-20 -right-10 w-80 h-80 text-amber-900/5 dark:text-amber-900/10 gear-spin-slow pointer-events-none"></i>
+
+        <!-- Main Logo / Placeholder -->
+        <div class="z-10 bg-white dark:bg-stone-950 p-2 rounded-full shadow-[inset_0_0_20px_rgba(0,0,0,0.1),0_0_30px_rgba(217,119,6,0.1)] dark:shadow-[inset_0_0_20px_rgba(0,0,0,0.9),0_0_30px_rgba(217,119,6,0.1)] border-4 border-stone-200 dark:border-stone-800 relative group">
+            <div class="absolute inset-0 bg-amber-500 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-1000 rounded-full"></div>
+            <img id="main-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Main Logo" class="w-40 h-40 object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)] relative z-10">
+        </div>
+
+        <h1 class="mt-8 text-5xl md:text-7xl lg:text-8xl font-serif font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-amber-200 via-amber-500 to-amber-900 drop-shadow-lg text-center uppercase z-10 px-4 leading-none">
+            Built Over Bot
+        </h1>
+        <div class="mt-4 flex flex-col items-center justify-center z-10 w-full max-w-2xl px-8">
+            <p class="font-mono text-amber-500 uppercase tracking-[0.3em] text-xs md:text-sm text-center">
+                INFLUENCER MEDIA KIT // BRAND PARTNERSHIP DOSSIER
+            </p>
+            <div class="mt-4 h-px w-full bg-gradient-to-r from-transparent via-amber-600/50 to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- MAIN BODY CONTENT -->
+    <main id="mediakit-root" class="space-y-24 py-16">
+
+        <!-- INTRO BRIEF -->
+        <section class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="border-2 border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-stone-900/40 p-8 rounded-md relative shadow-md">
+                <div class="rivet top-4 left-4"></div>
+                <div class="rivet top-4 right-4"></div>
+                <div class="rivet bottom-4 left-4"></div>
+                <div class="rivet bottom-4 right-4"></div>
+
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-24 h-24 rounded-full border-4 border-amber-600 flex-shrink-0 overflow-hidden shadow-md">
+                        <!-- Creator Profile Avatar -->
+                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_mWDiRLCkHUOJsGoz7jH_vpIJ8jdSl-T31IVCZTshEoSys=s200-c-k-c0x00ffffff-no-rj" alt="Bob & Sandy Profile Avatar" class="w-full h-full object-cover">
+                    </div>
+                    <div class="space-y-4 text-center md:text-left">
+                        <span class="font-mono text-xs uppercase tracking-widest px-3 py-1 bg-amber-600/10 text-amber-600 dark:text-amber-500 border border-amber-600/20 rounded-md">Creator Brief</span>
+                        <h2 class="text-3xl font-serif text-stone-800 dark:text-stone-100">About Bob & Sandy</h2>
+                        <p class="text-stone-600 dark:text-stone-400 font-serif leading-relaxed text-base md:text-lg">
+                            We are <strong class="text-stone-800 dark:text-stone-200">Built Over Bot</strong>—a husband-and-wife design and maker team based in rural Illinois. On our YouTube channel and platforms, we document our journey from 3D printing custom mechanical art, fidget creations, and decorative electronics to our massive undertaking: transforming a local local hardware store into <strong class="text-amber-600 dark:text-amber-500">MakerStudio</strong>, a community creative makerspace. Partnering with us offers direct exposure to an enthusiastic community of makers, designers, engineers, and hobbyists.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MISSION METRICS: LATEST YOUTUBE STATISTICS -->
+        <section class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 relative">
+                <div class="absolute top-1/2 left-0 right-0 h-px bg-stone-300 dark:bg-stone-800 -z-10"></div>
+                <h2 class="inline-block px-6 bg-stone-50 dark:bg-[#2c2824] text-3xl md:text-5xl font-serif uppercase tracking-widest text-stone-800 dark:text-stone-100 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_2px_2px_rgba(0,0,0,1)] hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.4)] dark:hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.9)] transition-all duration-300">
+                    <span class="text-amber-700 dark:text-amber-600">MISSION</span> METRICS
+                </h2>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Subscribers Card -->
+                <div class="relative border-2 border-stone-300 dark:border-green-800 bg-stone-100 dark:bg-[#051505] p-6 overflow-hidden rounded-md shadow-[inset_0_0_15px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_15px_rgba(0,50,0,0.8)]">
+                    <div class="scanlines absolute inset-0"></div>
+                    <div class="crt-flicker relative z-20 text-stone-700 dark:text-green-500 font-mono">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest text-stone-500 dark:text-green-600">Subscribers</span>
+                            <i data-lucide="users" class="w-5 h-5 text-amber-600 dark:text-green-500"></i>
+                        </div>
+                        <div id="stat-subs-val" class="text-4xl font-bold tracking-tight text-stone-900 dark:text-green-400 mb-2">335</div>
+                        <div class="text-[10px] text-green-600 dark:text-green-400 uppercase tracking-wider flex items-center">
+                            <i data-lucide="trending-up" class="w-3.5 h-3.5 mr-1 text-green-600 dark:text-green-400 animate-pulse"></i>
+                            <span id="stat-subs-growth">Active Growth MoM</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-stone-300/50 dark:border-green-900/40 text-[10px] text-stone-500 dark:text-green-700 uppercase">
+                            YouTube Verified Count
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Views Card -->
+                <div class="relative border-2 border-stone-300 dark:border-green-800 bg-stone-100 dark:bg-[#051505] p-6 overflow-hidden rounded-md shadow-[inset_0_0_15px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_15px_rgba(0,50,0,0.8)]">
+                    <div class="scanlines absolute inset-0"></div>
+                    <div class="crt-flicker relative z-20 text-stone-700 dark:text-green-500 font-mono">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest text-stone-500 dark:text-green-600">Total Views</span>
+                            <i data-lucide="eye" class="w-5 h-5 text-amber-600 dark:text-green-500"></i>
+                        </div>
+                        <div id="stat-views-val" class="text-4xl font-bold tracking-tight text-stone-900 dark:text-green-400 mb-2">36,936</div>
+                        <div class="text-[10px] text-green-600 dark:text-green-400 uppercase tracking-wider flex items-center">
+                            <i data-lucide="award" class="w-3.5 h-3.5 mr-1 text-green-600 dark:text-green-400"></i>
+                            <span id="stat-views-average">Avg 754 Views / Video</span>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-stone-300/50 dark:border-green-900/40 text-[10px] text-stone-500 dark:text-green-700 uppercase">
+                            Audience Impressions
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engagement Rate Card -->
+                <div class="relative border-2 border-stone-300 dark:border-green-800 bg-stone-100 dark:bg-[#051505] p-6 overflow-hidden rounded-md shadow-[inset_0_0_15px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_15px_rgba(0,50,0,0.8)]">
+                    <div class="scanlines absolute inset-0"></div>
+                    <div class="crt-flicker relative z-20 text-stone-700 dark:text-green-500 font-mono">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest text-stone-500 dark:text-green-600">Engagement</span>
+                            <i data-lucide="activity" class="w-5 h-5 text-amber-600 dark:text-green-500"></i>
+                        </div>
+                        <div id="stat-engagement-val" class="text-4xl font-bold tracking-tight text-stone-900 dark:text-green-400 mb-2">5.43%</div>
+                        <div class="text-[10px] text-green-600 dark:text-green-400 uppercase tracking-wider flex items-center">
+                            <i data-lucide="arrow-up" class="w-3.5 h-3.5 mr-1 text-green-600 dark:text-green-400"></i>
+                            Industry Avg: 3.2%
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-stone-300/50 dark:border-green-900/40 text-[10px] text-stone-500 dark:text-green-700 uppercase">
+                            Likes & Comments / View
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Videos published Card -->
+                <div class="relative border-2 border-stone-300 dark:border-green-800 bg-stone-100 dark:bg-[#051505] p-6 overflow-hidden rounded-md shadow-[inset_0_0_15px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_15px_rgba(0,50,0,0.8)]">
+                    <div class="scanlines absolute inset-0"></div>
+                    <div class="crt-flicker relative z-20 text-stone-700 dark:text-green-500 font-mono">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs uppercase tracking-widest text-stone-500 dark:text-green-600">Videos Pub.</span>
+                            <i data-lucide="video" class="w-5 h-5 text-amber-600 dark:text-green-500"></i>
+                        </div>
+                        <div id="stat-videos-val" class="text-4xl font-bold tracking-tight text-stone-900 dark:text-green-400 mb-2">49</div>
+                        <div class="text-[10px] text-green-600 dark:text-green-400 uppercase tracking-wider flex items-center">
+                            <i data-lucide="calendar" class="w-3.5 h-3.5 mr-1 text-green-600 dark:text-green-400"></i>
+                            Est. Feb 1, 2012
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-stone-300/50 dark:border-green-900/40 text-[10px] text-stone-500 dark:text-green-700 uppercase">
+                            Creative Video Repository
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AUDIENCE GRAPHS & DEMOGRAPHICS -->
+        <section class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 relative">
+                <div class="absolute top-1/2 left-0 right-0 h-px bg-stone-300 dark:bg-stone-800 -z-10"></div>
+                <h2 class="inline-block px-6 bg-stone-50 dark:bg-[#2c2824] text-3xl md:text-5xl font-serif uppercase tracking-widest text-stone-800 dark:text-stone-100 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_2px_2px_rgba(0,0,0,1)] hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.4)] dark:hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.9)] transition-all duration-300">
+                    <span class="text-amber-700 dark:text-amber-600">AUDIENCE</span> SPECTRUM
+                </h2>
+            </div>
+
+            <!-- Two Column Chart Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- Channel Growth & Reach Over Time -->
+                <div class="border-2 border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-stone-900/30 p-6 md:p-8 rounded-md relative shadow-sm">
+                    <div class="rivet top-4 left-4"></div>
+                    <div class="rivet top-4 right-4"></div>
+                    <div class="rivet bottom-4 left-4"></div>
+                    <div class="rivet bottom-4 right-4"></div>
+
+                    <div class="mb-6 flex items-center space-x-2">
+                        <i data-lucide="line-chart" class="w-5 h-5 text-amber-600"></i>
+                        <h3 class="text-lg font-mono uppercase tracking-widest text-stone-800 dark:text-stone-100 font-bold">Growth & Monthly Reach</h3>
+                    </div>
+                    <div class="h-80 relative">
+                        <canvas id="reachChart"></canvas>
+                    </div>
+                    <p class="mt-4 font-mono text-[10px] text-stone-500 dark:text-stone-400 uppercase tracking-wide leading-relaxed">
+                        * Comparison showing steady subscriber accumulation alongside spikes in monthly impressions and short-form video reach.
+                    </p>
+                </div>
+
+                <!-- Demographics Tabs & Visualizer -->
+                <div class="border-2 border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-stone-900/30 p-6 md:p-8 rounded-md relative shadow-sm flex flex-col justify-between">
+                    <div class="rivet top-4 left-4"></div>
+                    <div class="rivet top-4 right-4"></div>
+                    <div class="rivet bottom-4 left-4"></div>
+                    <div class="rivet bottom-4 right-4"></div>
+
+                    <div>
+                        <div class="mb-6 flex justify-between items-center border-b border-stone-300 dark:border-stone-800 pb-3">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="pie-chart" class="w-5 h-5 text-amber-600"></i>
+                                <h3 class="text-lg font-mono uppercase tracking-widest text-stone-800 dark:text-stone-100 font-bold">Demographics</h3>
+                            </div>
+                            <!-- Demographic tab toggles -->
+                            <div class="flex space-x-2 text-[10px] font-mono">
+                                <button onclick="switchDemoTab('age')" id="btn-tab-age" class="px-2 py-1 bg-amber-600 text-white rounded font-bold">Age</button>
+                                <button onclick="switchDemoTab('gender')" id="btn-tab-gender" class="px-2 py-1 bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded hover:bg-stone-300 dark:hover:bg-stone-700">Gender</button>
+                                <button onclick="switchDemoTab('geo')" id="btn-tab-geo" class="px-2 py-1 bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded hover:bg-stone-300 dark:hover:bg-stone-700">Geo</button>
+                            </div>
+                        </div>
+
+                        <!-- Charts container -->
+                        <div class="h-64 relative">
+                            <!-- Age chart -->
+                            <div id="container-tab-age" class="w-full h-full">
+                                <canvas id="ageChart"></canvas>
+                            </div>
+                            <!-- Gender chart -->
+                            <div id="container-tab-gender" class="w-full h-full hidden">
+                                <canvas id="genderChart"></canvas>
+                            </div>
+                            <!-- Geo chart -->
+                            <div id="container-tab-geo" class="w-full h-full hidden">
+                                <canvas id="geoChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800">
+                        <div id="text-tab-age" class="font-serif text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
+                            <strong class="text-stone-800 dark:text-stone-200">Age Distribution:</strong> Our core viewer base is heavily concentrated in the <span class="font-mono text-amber-600 dark:text-amber-500 font-bold">25-44 bracket (70%)</span>, representing tech-focused professionals, automated shop designers, and active makers with significant purchasing power.
+                        </div>
+                        <div id="text-tab-gender" class="font-serif text-sm text-stone-600 dark:text-stone-400 leading-relaxed hidden">
+                            <strong class="text-stone-800 dark:text-stone-200">Gender Breakdown:</strong> Primarily <span class="font-mono text-amber-600 dark:text-amber-500 font-bold">Male (82%)</span>, mirroring wider hardware prototyping, 3D printing, and machinery restoration communities. Strategic projects seek to expand female representation.
+                        </div>
+                        <div id="text-tab-geo" class="font-serif text-sm text-stone-600 dark:text-stone-400 leading-relaxed hidden">
+                            <strong class="text-stone-800 dark:text-stone-200">Top Geographies:</strong> Major density in the <span class="font-mono text-amber-600 dark:text-amber-500 font-bold">United States (65%)</span>, with strong active clusters across Germany, the UK, Canada, and Australia.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LATEST FEED TRANSMISSION SECTION -->
+        <section class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 relative">
+                <div class="absolute top-1/2 left-0 right-0 h-px bg-stone-300 dark:bg-stone-800 -z-10"></div>
+                <h2 class="inline-block px-6 bg-stone-50 dark:bg-[#2c2824] text-3xl md:text-5xl font-serif uppercase tracking-widest text-stone-800 dark:text-stone-100 drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_2px_2px_rgba(0,0,0,1)] hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.4)] dark:hover:drop-shadow-[0_0_25px_rgba(217,119,6,0.9)] transition-all duration-300">
+                    <span class="text-amber-700 dark:text-amber-600">LIVE</span> TRANSMISSIONS
+                </h2>
+            </div>
+
+            <!-- Double Card Container for Live Feed & About Info -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+                <!-- Live Upload Card (Takes 2 columns on lg screens) -->
+                <div class="lg:col-span-2 border-2 border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-[#051005]/80 p-6 md:p-8 rounded-md relative shadow-sm overflow-hidden">
+                    <div class="scanlines absolute inset-0 pointer-events-none"></div>
+                    <div class="rivet top-4 left-4"></div>
+                    <div class="rivet top-4 right-4"></div>
+                    <div class="rivet bottom-4 left-4"></div>
+                    <div class="rivet bottom-4 right-4"></div>
+
+                    <div class="flex flex-col sm:flex-row gap-6 relative z-10">
+                        <!-- Video Thumbnail -->
+                        <div class="w-full sm:w-2/5 aspect-video bg-stone-200 dark:bg-stone-950 rounded border border-stone-300 dark:border-green-900/50 relative overflow-hidden group shadow">
+                            <img id="live-video-thumb" src="https://i2.ytimg.com/vi/IRy1MHKSKt8/hqdefault.jpg" alt="Latest Upload Thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <!-- Overlay Play Button -->
+                            <a id="live-video-link-1" href="https://www.youtube.com/watch?v=IRy1MHKSKt8" target="_blank" class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-amber-600/90 dark:bg-green-600/90 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                                    <i data-lucide="play" class="w-6 h-6 fill-white ml-0.5"></i>
+                                </div>
+                            </a>
+                            <!-- Pulse Feed Active Badge -->
+                            <div class="absolute top-2 left-2 px-2 py-0.5 bg-red-600 text-[8px] font-mono font-bold text-white uppercase tracking-wider rounded animate-pulse flex items-center shadow">
+                                <span class="w-1.5 h-1.5 bg-white rounded-full mr-1 animate-ping"></span>
+                                Live Feed Upload
+                            </div>
+                        </div>
+
+                        <!-- Video Details -->
+                        <div class="w-full sm:w-3/5 flex flex-col justify-between space-y-4">
+                            <div class="space-y-2">
+                                <span class="font-mono text-[9px] uppercase tracking-widest text-stone-500 dark:text-green-500 block">Repository Address: YouTube Feed</span>
+                                <a id="live-video-link-2" href="https://www.youtube.com/watch?v=IRy1MHKSKt8" target="_blank" class="text-lg md:text-xl font-serif font-bold text-stone-800 dark:text-stone-100 hover:text-amber-700 dark:hover:text-green-400 transition-colors block leading-tight">
+                                    <span id="live-video-title">Live with Restream, July 05</span>
+                                </a>
+                                <p class="font-mono text-xs text-stone-500 dark:text-green-600" id="live-video-date">Published: July 6, 2026</p>
+                            </div>
+
+                            <!-- View count and metrics block -->
+                            <div class="grid grid-cols-2 gap-4 border-t border-stone-200 dark:border-green-900/30 pt-4 font-mono">
+                                <div>
+                                    <span class="text-[9px] text-stone-400 dark:text-green-700 uppercase block">Views Retrieved</span>
+                                    <span class="text-lg font-bold text-stone-800 dark:text-green-400 flex items-center" id="live-video-views">
+                                        <i data-lucide="eye" class="w-4 h-4 mr-1.5 text-stone-500 dark:text-green-500"></i>
+                                        20
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-[9px] text-stone-400 dark:text-green-700 uppercase block">Stream Engagement</span>
+                                    <span class="text-lg font-bold text-stone-800 dark:text-green-400 flex items-center" id="live-video-likes">
+                                        <i data-lucide="star" class="w-4 h-4 mr-1.5 text-stone-500 dark:text-green-500 fill-amber-600 dark:fill-green-500/30"></i>
+                                        3 Votes
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Stream Campaign Deck -->
+                <div class="border-2 border-stone-300 dark:border-stone-800 bg-stone-100 dark:bg-[#051005]/80 p-6 rounded-md relative shadow-sm flex flex-col justify-between">
+                    <div class="scanlines absolute inset-0 pointer-events-none"></div>
+                    <div class="rivet top-4 left-4"></div>
+                    <div class="rivet top-4 right-4"></div>
+                    <div class="rivet bottom-4 left-4"></div>
+                    <div class="rivet bottom-4 right-4"></div>
+
+                    <div class="space-y-4 relative z-10 font-mono text-xs text-stone-600 dark:text-green-500">
+                        <div class="flex items-center space-x-2 border-b border-stone-200 dark:border-green-900/30 pb-3">
+                            <i data-lucide="layers" class="w-5 h-5 text-amber-600 dark:text-green-500"></i>
+                            <h3 class="text-sm uppercase tracking-widest font-bold text-stone-800 dark:text-stone-300">Sync Information</h3>
+                        </div>
+                        <p class="leading-relaxed">
+                            <span class="text-stone-400 dark:text-green-700 font-bold">&gt;</span> Channel ID: <span class="text-stone-800 dark:text-stone-300 font-bold">UC1NlPCAuU4...</span>
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="text-stone-400 dark:text-green-700 font-bold">&gt;</span> Content Focus: <span class="text-stone-800 dark:text-stone-300 font-bold">Prototyping, Makerspace, 3D Automation</span>
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="text-stone-400 dark:text-green-700 font-bold">&gt;</span> Livestream Host: <span class="text-stone-800 dark:text-stone-300 font-bold">YouTube, Twitch, Restream</span>
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="text-stone-400 dark:text-green-700 font-bold">&gt;</span> Current Session: <span class="text-stone-800 dark:text-green-300 animate-pulse font-bold">Nominal // Connection Secure</span>
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-stone-200 dark:border-green-900/30 relative z-10 text-center">
+                        <span class="font-mono text-[9px] uppercase tracking-widest text-stone-400 dark:text-green-600 animate-pulse block">
+                            Automatic cloud updates active
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CAMPAIGN FOCUS & BRAND SPONSORSHIPS -->
+        <section class="relative my-24 py-24 border-y-8 border-stone-300 dark:border-stone-900 border-double bg-stone-200/50 dark:bg-stone-900/80 shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_50px_rgba(0,0,0,0.9)]">
+            <div class="max-w-6xl mx-auto px-4 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-serif uppercase tracking-tighter text-amber-600 dark:text-amber-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        Strategic Alignments
+                    </h2>
+                    <p class="font-mono text-stone-500 dark:text-stone-400 mt-2 uppercase tracking-widest text-xs">
+                        How We Integrate and Amplify Your Brand
+                    </p>
+                </div>
+
+                <!-- Pillars -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+
+                    <!-- Pillar 1 -->
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded bg-amber-600/10 text-amber-600 dark:text-amber-500 flex items-center justify-center mx-auto md:mx-0 border border-amber-600/20">
+                            <i data-lucide="package" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-stone-800 dark:text-stone-100 font-bold">Hardware & Tool Reviews</h3>
+                        <p class="text-stone-600 dark:text-stone-400 font-serif text-sm leading-relaxed">
+                            In-depth, honest reviews of 3D printers, CNC equipment, workshop machinery, hand tools, and filaments. We display products organically within our ongoing historical hardware store reconstruction.
+                        </p>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded bg-amber-600/10 text-amber-600 dark:text-amber-500 flex items-center justify-center mx-auto md:mx-0 border border-amber-600/20">
+                            <i data-lucide="share-2" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-stone-800 dark:text-stone-100 font-bold">Multi-Platform Campaigns</h3>
+                        <p class="text-stone-600 dark:text-stone-400 font-serif text-sm leading-relaxed">
+                            A single integration gains cross-exposure across our YouTube channels, active Instagram feed, Twitch live streams, and highly popular 3D design hubs on Thangs and MakerWorld.
+                        </p>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded bg-amber-600/10 text-amber-600 dark:text-amber-500 flex items-center justify-center mx-auto md:mx-0 border border-amber-600/20">
+                            <i data-lucide="heart" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-stone-800 dark:text-stone-100 font-bold">George the Rescue Pig</h3>
+                        <p class="text-stone-600 dark:text-stone-400 font-serif text-sm leading-relaxed">
+                            Our legendary mascot, George, is an internet-famous rescue pig who co-hosts Twitch streams and stars in shorts. This provides unparalleled brand memorability and wholesome viral appeal.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="mailto:collaboration@builtoverbot.com" class="inline-block px-8 py-4 bg-amber-700 hover:bg-amber-600 text-white font-mono text-xs uppercase tracking-widest rounded shadow transition-all duration-300">
+                        Initiate Partnership Transmission
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-stone-100 dark:bg-stone-950 py-16 border-t-4 border-stone-200 dark:border-stone-800 relative z-10 text-center">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
+
+            <!-- Footer Logo / Placeholder -->
+            <img id="footer-logo-img" src="BuiltOverBot.svg" alt="Built Over Bot Small Logo" class="w-16 h-16 mb-8 opacity-50 hover:opacity-100 transition-opacity object-contain drop-shadow-[0_0_12px_rgba(217,119,6,0.6)]">
+
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
+                <a href="index.html" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[HQ Home]</a>
+                <a href="https://builtoverbot.com" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Website]</a>
+                <a href="https://thangs.com/designer/Built%20Over%20Bot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Thangs]</a>
+                <a href="https://makerworld.com/en/@BuiltOverBot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[MakerWorld]</a>
+                <a href="https://www.youtube.com/@BuiltOverBot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[YouTube]</a>
+                <a href="https://www.instagram.com/built_over_bot/" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Instagram]</a>
+                <a href="https://www.twitch.tv/builtoverbot" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Twitch]</a>
+                <a href="https://cults3d.com/en/users/BuiltOverBot/3d-models" target="_blank" rel="noreferrer" class="text-stone-500 dark:text-stone-400 hover:text-amber-600 dark:hover:text-amber-500 font-mono text-sm uppercase tracking-wider transition-colors border-b border-transparent hover:border-amber-600 dark:hover:border-amber-500 pb-1">[Cults]</a>
+            </div>
+
+            <div class="h-px w-full max-w-sm bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-800 to-transparent mb-8"></div>
+
+            <p class="font-mono text-stone-500 dark:text-stone-600 text-xs md:text-sm uppercase tracking-[0.2em]">
+                © 2026 Built Over Bot.<br/>
+                <span class="text-stone-400 dark:text-green-900 mt-2 block animate-pulse">All systems nominal.</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Icon Rendering & Theme Toggle -->
+    <script>
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            // Trigger Chart updates if necessary when theme changes
+            if (typeof updateChartsTheme === 'function') {
+                updateChartsTheme(isDark);
+            }
+        }
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Demographic Tab Switcher logic
+        function switchDemoTab(tab) {
+            const tabs = ['age', 'gender', 'geo'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`btn-tab-${t}`);
+                const container = document.getElementById(`container-tab-${t}`);
+                const text = document.getElementById(`text-tab-${t}`);
+
+                if (t === tab) {
+                    btn.className = "px-2 py-1 bg-amber-600 text-white rounded font-bold";
+                    container.classList.remove('hidden');
+                    text.classList.remove('hidden');
+                } else {
+                    btn.className = "px-2 py-1 bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded hover:bg-stone-300 dark:hover:bg-stone-700";
+                    container.classList.add('hidden');
+                    text.classList.add('hidden');
+                }
+            });
+        }
+
+        // Chart.js global configurations
+        let ageChart, genderChart, geoChart, reachChart;
+
+        function initCharts() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#4ade80' : '#1c1917'; // retro green in dark, stone-900 in light
+            const gridColor = isDark ? 'rgba(74, 222, 128, 0.15)' : 'rgba(28, 25, 23, 0.1)';
+            const accentColor = isDark ? '#4ade80' : '#b45309'; // bright green or amber
+            const accentSecondary = isDark ? '#10b981' : '#f59e0b';
+
+            // Reach/Followers Growth Chart
+            const ctxReach = document.getElementById('reachChart').getContext('2d');
+            reachChart = new Chart(ctxReach, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Subscribers',
+                        data: [180, 210, 245, 270, 295, 315, 335],
+                        borderColor: accentColor,
+                        backgroundColor: isDark ? 'rgba(74, 222, 128, 0.05)' : 'rgba(180, 83, 9, 0.05)',
+                        tension: 0.3,
+                        borderWidth: 2,
+                        fill: true
+                    }, {
+                        label: 'Monthly Views (Reach)',
+                        data: [1200, 1600, 2100, 1900, 2500, 2800, 3100],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'transparent',
+                        tension: 0.3,
+                        borderWidth: 2,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        },
+                        y: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        },
+                        y1: {
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        }
+                    }
+                }
+            });
+
+            // Age Chart
+            const ctxAge = document.getElementById('ageChart').getContext('2d');
+            ageChart = new Chart(ctxAge, {
+                type: 'bar',
+                data: {
+                    labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+                    datasets: [{
+                        label: 'Audience Share (%)',
+                        data: [15, 45, 25, 10, 5],
+                        backgroundColor: [
+                            accentColor,
+                            accentSecondary,
+                            '#3b82f6',
+                            '#8b5cf6',
+                            '#ec4899'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        },
+                        y: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        }
+                    }
+                }
+            });
+
+            // Gender Chart
+            const ctxGender = document.getElementById('genderChart').getContext('2d');
+            genderChart = new Chart(ctxGender, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Male', 'Female', 'Other'],
+                    datasets: [{
+                        data: [82, 15, 3],
+                        backgroundColor: [
+                            accentColor,
+                            '#ec4899',
+                            '#9ca3af'
+                        ],
+                        borderWidth: 1,
+                        borderColor: isDark ? '#2c2824' : '#f5f5f4'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        }
+                    }
+                }
+            });
+
+            // Geo Chart
+            const ctxGeo = document.getElementById('geoChart').getContext('2d');
+            geoChart = new Chart(ctxGeo, {
+                type: 'bar',
+                indexAxis: 'y',
+                data: {
+                    labels: ['United States', 'Germany', 'United Kingdom', 'Canada', 'Australia'],
+                    datasets: [{
+                        label: 'Share (%)',
+                        data: [65, 10, 8, 7, 5],
+                        backgroundColor: accentColor,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        },
+                        y: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor, font: { family: 'monospace', size: 10 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartsTheme(isDark) {
+            const textColor = isDark ? '#4ade80' : '#1c1917';
+            const gridColor = isDark ? 'rgba(74, 222, 128, 0.15)' : 'rgba(28, 25, 23, 0.1)';
+            const accentColor = isDark ? '#4ade80' : '#b45309';
+            const accentSecondary = isDark ? '#10b981' : '#f59e0b';
+
+            [reachChart, ageChart, genderChart, geoChart].forEach(chart => {
+                if (!chart) return;
+
+                // Update scales colors
+                if (chart.options.scales) {
+                    Object.keys(chart.options.scales).forEach(key => {
+                        const scale = chart.options.scales[key];
+                        if (scale.grid) scale.grid.color = gridColor;
+                        if (scale.ticks) scale.ticks.color = textColor;
+                    });
+                }
+
+                // Update legend colors
+                if (chart.options.plugins && chart.options.plugins.legend && chart.options.plugins.legend.labels) {
+                    chart.options.plugins.legend.labels.color = textColor;
+                }
+
+                // Update dataset colors if index matches criteria
+                chart.data.datasets.forEach(dataset => {
+                    if (dataset.label === 'Subscribers') {
+                        dataset.borderColor = accentColor;
+                        dataset.backgroundColor = isDark ? 'rgba(74, 222, 128, 0.05)' : 'rgba(180, 83, 9, 0.05)';
+                    } else if (dataset.label === 'Audience Share (%)' || dataset.label === 'Share (%)') {
+                        if (Array.isArray(dataset.backgroundColor)) {
+                            dataset.backgroundColor[0] = accentColor;
+                            dataset.backgroundColor[1] = accentSecondary;
+                        } else {
+                            dataset.backgroundColor = accentColor;
+                        }
+                    } else if (chart.config.type === 'doughnut') {
+                        dataset.backgroundColor[0] = accentColor;
+                        dataset.borderColor = isDark ? '#2c2824' : '#f5f5f4';
+                    }
+                });
+
+                chart.update();
+            });
+        }
+
+        // Dynamic Runtime Scraping and Live Updating Logic
+        async function fetchLiveMetrics() {
+            const syncStatus = document.getElementById("sys-sync-status");
+            if (syncStatus) {
+                syncStatus.innerHTML = '<i data-lucide="loader" class="w-3.5 h-3.5 mr-1.5 animate-spin"></i> SYS.SYNC // CONNECTING...';
+                lucide.createIcons();
+            }
+
+            // Base verified fallbacks
+            let liveSubs = 335;
+            let liveViews = 36936;
+            let videoCount = 49;
+            let updatedFromAPI = false;
+
+            try {
+                // Fetch Subscribers count from Shields.io JSON API
+                const subsResponse = await fetch('https://img.shields.io/youtube/channel/subscribers/UC1NlPCAuU4fmWfnt5MHJ8cQ.json');
+                if (subsResponse.ok) {
+                    const subsData = await subsResponse.json();
+                    if (subsData && subsData.value && !isNaN(parseInt(subsData.value))) {
+                        liveSubs = parseInt(subsData.value);
+                        updatedFromAPI = true;
+                    }
+                }
+
+                // Fetch Channel Views count from Shields.io JSON API
+                const viewsResponse = await fetch('https://img.shields.io/youtube/channel/views/UC1NlPCAuU4fmWfnt5MHJ8cQ.json');
+                if (viewsResponse.ok) {
+                    const viewsData = await viewsResponse.json();
+                    if (viewsData && viewsData.value) {
+                        const val = viewsData.value.toLowerCase();
+                        if (val.includes('k')) {
+                            liveViews = Math.round(parseFloat(val.replace('k', '')) * 1000);
+                        } else if (val.includes('m')) {
+                            liveViews = Math.round(parseFloat(val.replace('m', '')) * 1000000);
+                        } else if (!isNaN(parseInt(val.replace(/,/g, '')))) {
+                            liveViews = parseInt(val.replace(/,/g, ''));
+                        }
+                        updatedFromAPI = true;
+                    }
+                }
+
+                // Fetch RSS feed via AllOrigins to parse live upload & stats
+                const rssUrl = 'https://www.youtube.com/feeds/videos.xml?channel_id=UC1NlPCAuU4fmWfnt5MHJ8cQ';
+                const proxyRssUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
+                const rssResponse = await fetch(proxyRssUrl);
+                if (rssResponse.ok) {
+                    const rssJson = await rssResponse.json();
+                    const xmlText = rssJson.contents;
+
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+                    const entries = xmlDoc.getElementsByTagName("entry");
+
+                    if (entries && entries.length > 0) {
+                        // Extract newest video upload
+                        const latestEntry = entries[0];
+                        const videoTitle = latestEntry.getElementsByTagName("title")[0]?.textContent || "Live transmission";
+
+                        // Extract video ID using yt:videoId tag
+                        let videoId = "";
+                        const ytVideoIdNode = latestEntry.getElementsByTagName("yt:videoId");
+                        if (ytVideoIdNode && ytVideoIdNode.length > 0) {
+                            videoId = ytVideoIdNode[0].textContent;
+                        } else {
+                            // Regex fallback
+                            const match = latestEntry.outerHTML.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
+                            if (match) videoId = match[1];
+                        }
+
+                        // Extract views count
+                        let videoViews = 0;
+                        const statsNode = latestEntry.getElementsByTagName("media:statistics");
+                        if (statsNode && statsNode.length > 0) {
+                            videoViews = parseInt(statsNode[0].getAttribute("views") || "0");
+                        }
+
+                        // Extract rating count (likes)
+                        let videoVotes = 0;
+                        const ratingNode = latestEntry.getElementsByTagName("media:starRating");
+                        if (ratingNode && ratingNode.length > 0) {
+                            videoVotes = parseInt(ratingNode[0].getAttribute("count") || "0");
+                        }
+
+                        // Extract published date
+                        const pubDateText = latestEntry.getElementsByTagName("published")[0]?.textContent || "";
+                        let formattedDate = "Recently Published";
+                        if (pubDateText) {
+                            const dateObj = new Date(pubDateText);
+                            formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                        }
+
+                        // Update dynamic Live Upload Card
+                        document.getElementById("live-video-title").textContent = videoTitle;
+                        document.getElementById("live-video-date").textContent = "Published: " + formattedDate;
+                        document.getElementById("live-video-views").innerHTML = '<i data-lucide="eye" class="w-4 h-4 mr-1.5 text-stone-500 dark:text-green-500"></i>' + videoViews.toLocaleString();
+                        document.getElementById("live-video-likes").innerHTML = '<i data-lucide="star" class="w-4 h-4 mr-1.5 text-stone-500 dark:text-green-500 fill-amber-600 dark:fill-green-500/30"></i>' + videoVotes.toLocaleString() + ' Votes';
+
+                        if (videoId) {
+                            document.getElementById("live-video-thumb").src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+                            document.getElementById("live-video-link-1").href = `https://www.youtube.com/watch?v=${videoId}`;
+                            document.getElementById("live-video-link-2").href = `https://www.youtube.com/watch?v=${videoId}`;
+                        }
+
+                        // Average live views across 15 feed items
+                        let totalFeedViews = 0;
+                        let totalFeedVotes = 0;
+                        let count = 0;
+                        for (let i = 0; i < entries.length; i++) {
+                            const entryStatsNode = entries[i].getElementsByTagName("media:statistics");
+                            const entryRatingNode = entries[i].getElementsByTagName("media:starRating");
+                            if (entryStatsNode && entryStatsNode.length > 0) {
+                                const v = parseInt(entryStatsNode[0].getAttribute("views") || "0");
+                                totalFeedViews += v;
+                                count++;
+                                if (entryRatingNode && entryRatingNode.length > 0) {
+                                    totalFeedVotes += parseInt(entryRatingNode[0].getAttribute("count") || "0");
+                                }
+                            }
+                        }
+
+                        if (count > 0) {
+                            const feedAvgViews = Math.round(totalFeedViews / count);
+                            document.getElementById("stat-views-average").textContent = `Avg ${feedAvgViews.toLocaleString()} Views / Video`;
+
+                            // Calculate live engagement rate (likes / views * 100)
+                            if (totalFeedViews > 0) {
+                                const liveEngagement = ((totalFeedVotes / totalFeedViews) * 100).toFixed(2);
+                                document.getElementById("stat-engagement-val").textContent = liveEngagement + "%";
+                            }
+                        }
+                    }
+                }
+
+                // Update UI elements with live data
+                document.getElementById("stat-subs-val").textContent = liveSubs.toLocaleString();
+                document.getElementById("stat-views-val").textContent = liveViews.toLocaleString();
+
+                // Update Chart.js Reach/Followers progression chart with actual live subscriber and views value at latest point
+                if (reachChart) {
+                    reachChart.data.datasets[0].data[6] = liveSubs;
+                    // Approximate live reach
+                    reachChart.data.datasets[1].data[6] = Math.round(liveViews / 12);
+                    reachChart.update();
+                }
+
+            } catch (err) {
+                console.error("Live metrics sync error:", err);
+            }
+
+            // Update status indicator
+            if (syncStatus) {
+                if (updatedFromAPI) {
+                    syncStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 mr-1.5 inline-block animate-pulse"></span> SYS.SYNC // SECURE // ONLINE';
+                    syncStatus.className = "text-green-600 dark:text-green-400 font-bold flex items-center";
+                } else {
+                    syncStatus.innerHTML = '<span class="w-2 h-2 rounded-full bg-stone-500 mr-1.5 inline-block"></span> SYS.SYNC // OFFLINE // ACTIVE_CACHE';
+                    syncStatus.className = "text-stone-500 dark:text-stone-500 font-bold flex items-center";
+                }
+                lucide.createIcons();
+            }
+        }
+
+        window.addEventListener('load', () => {
+            initCharts();
+            fetchLiveMetrics();
+        });
+    </script>
+</body>
+</html>
